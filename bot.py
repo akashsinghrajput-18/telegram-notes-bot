@@ -1,8 +1,8 @@
+import os
 import json
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-# Admin Telegram user id
 ADMIN_ID = 1056821860
 
 # JSON file path (same folder mein rakho)
@@ -68,7 +68,7 @@ async def add_subject(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     subject_name = args[0].lower()
-    link = " ".join(args[1:])  # rest is link
+    link = " ".join(args[1:])  
 
     subjects = load_subjects()
     subjects[subject_name] = link
@@ -78,7 +78,7 @@ async def add_subject(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # 🧠 Main bot setup
 if __name__ == '__main__':
-    app = ApplicationBuilder().token("7973915378:AAEJX1T_bv3Z7B34PTwwYmPpXDI16ic59CI").build()  # ← अपना token डालो
+    app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()  
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("list", list_subjects))
